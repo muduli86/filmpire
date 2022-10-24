@@ -13,25 +13,27 @@ const App = () => {
     >
       <CssBaseline />
       <Navbar />
-      <Box
-        sx={{
-          flexGrow: 1,
-          padding: "2em",
+      <main
+        style={{
+          flexGrow: 2,
+          paddingTop: "5em",
+          paddingLeft: "2em",
+          paddingRight: "2em",
         }}
       >
-        <Box
-          sx={{
+        <div
+          style={{
             height: "70px",
           }}
         >
           <Routes>
-            <Route path="/" element={<Movies />} />
-            <Route path="/movies/:id" element={<MovieInformation />} />
-            <Route path="/actors" element={<Actors />} />
-            <Route path="/profile/:id" element={<Profile />} />
+            <Route path='/' element={<Movies />} />
+            <Route path='/movies/:id' element={<MovieInformation />} />
+            <Route path='/actors' element={<Actors />} />
+            <Route path='/profile/:id' element={<Profile />} />
           </Routes>
-        </Box>
-      </Box>
+        </div>
+      </main>
     </Box>
   );
 };

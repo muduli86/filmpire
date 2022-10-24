@@ -22,33 +22,71 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const theme = useTheme();
-  // const xsUp = useMediaQuery(theme.breakpoints.up("sm"));
-  // const xsDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const isAuthenticated = true;
   return (
     <>
-      <AppBar position="fixed">
-        <Toolbar>
+      <AppBar position='fixed' component='nav'>
+        <Toolbar
+          sx={{
+            height: "80px",
+            display: "flex",
+            justifyContent: "space-between",
+            marginLeft: "240px",
+            [theme.breakpoints.down("sm")]: {
+              marginLeft: "0",
+              flexWrap: "wrap",
+            },
+          }}
+        >
           {isMobile && (
             <IconButton
-              color="inherit"
-              edge="start"
+              color='inherit'
+              edge='start'
               style={{ outline: "none" }}
               onClick={() => {}}
               sx={{
-                height: "80px",
-                display: "flex",
-                justifyContent: "space-between",
-                marginLeft: "240px",
+                marginRight: (theme) => theme.spacing(2),
+                [theme.breakpoints.up("sm")]: {
+                  display: "none",
+                },
               }}
             >
-              <Menu
-                sx={{
-                  display: { sm: "none", xs: "block" },
-                  marginRight: (theme) => theme.spacing(2),
-                }}
-              />
+              <Menu />
             </IconButton>
           )}
+
+          <IconButton
+            color='inherit'
+            sx={{
+              ml: 1,
+            }}
+            onClick={() => {}}
+          >
+            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+            {!isMobile && "Search...."}
+            <div>
+              {!isAuthenticated ? (
+                <Button color='inherit' onClick={() => {}}>
+                  Login &nbsp; <AccountCircle />
+                </Button>
+              ) : (
+                <Button
+                  color='inherit'
+                  component={Link}
+                  to={`/profile/:id`}
+                  onClick={() => {}}
+                >
+                  {!isMobile && <> Movies</>}
+                  <Avatar
+                    style={{ width: 30, height: 30 }}
+                    alt='Profile'
+                    src='https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-avatar-placeholder-png-image_3416697.jpg'
+                  />
+                </Button>
+              )}
+            </div>
+            {isMobile && "Search...."}
+          </IconButton>
         </Toolbar>
       </AppBar>
     </>
