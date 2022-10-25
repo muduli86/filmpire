@@ -1,0 +1,7 @@
+.movieImage:hover{
+  transform: scale(1.05)
+}
+
+.movieLink:hover{
+  cursor: pointer; 
+}

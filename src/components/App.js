@@ -23,14 +23,13 @@ const App = () => {
           style={{
             height: "70px",
           }}
-        >
-          <Routes>
-            <Route path="/" element={<Movies />} />
-            <Route path="/movies/:id" element={<MovieInformation />} />
-            <Route path="/actors" element={<Actors />} />
-            <Route path="/profile/:id" element={<Profile />} />
-          </Routes>
-        </div>
+        ></div>
+        <Routes>
+          <Route path='/' element={<Movies />} />
+          <Route path='/movies/:id' element={<MovieInformation />} />
+          <Route path='/actors' element={<Actors />} />
+          <Route path='/profile/:id' element={<Profile />} />
+        </Routes>
       </main>
     </div>
   );
