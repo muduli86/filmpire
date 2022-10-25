@@ -18,3 +18,8 @@ https://arc.dev/?utm_source=influencer-bootcamp&utm_medium=courses&utm_campaign=
 # Live Site
 
 https://filmpire.netlify.app/
+
+# TMDB
+
+Documentation: https://developers.themoviedb.org/3
+API settings: https://www.themoviedb.org/settings/api
