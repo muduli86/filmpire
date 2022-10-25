@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   AppBar,
@@ -18,14 +18,16 @@ import {
 } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import NavDrawer from "./NavDrawer";
 
 const Navbar = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const theme = useTheme();
   const isAuthenticated = true;
+  const [drawerOpen, setDrawerOpen] = useState(false);
   return (
     <>
-      <AppBar position='fixed' component='nav'>
+      <AppBar position="fixed">
         <Toolbar
           sx={{
             height: "80px",
@@ -40,10 +42,10 @@ const Navbar = () => {
         >
           {isMobile && (
             <IconButton
-              color='inherit'
-              edge='start'
+              color="inherit"
+              edge="start"
               style={{ outline: "none" }}
-              onClick={() => {}}
+              onClick={() => setDrawerOpen((prevDrawerOpen) => !prevDrawerOpen)}
               sx={{
                 marginRight: (theme) => theme.spacing(2),
                 [theme.breakpoints.up("sm")]: {
@@ -56,39 +58,50 @@ const Navbar = () => {
           )}
 
           <IconButton
-            color='inherit'
+            color="inherit"
             sx={{
               ml: 1,
             }}
             onClick={() => {}}
           >
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
-            {!isMobile && "Search...."}
-            <div>
-              {!isAuthenticated ? (
-                <Button color='inherit' onClick={() => {}}>
-                  Login &nbsp; <AccountCircle />
-                </Button>
-              ) : (
-                <Button
-                  color='inherit'
-                  component={Link}
-                  to={`/profile/:id`}
-                  onClick={() => {}}
-                >
-                  {!isMobile && <> Movies</>}
-                  <Avatar
-                    style={{ width: 30, height: 30 }}
-                    alt='Profile'
-                    src='https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-avatar-placeholder-png-image_3416697.jpg'
-                  />
-                </Button>
-              )}
-            </div>
-            {isMobile && "Search...."}
           </IconButton>
+          {!isMobile && "Search...."}
+          <div>
+            {!isAuthenticated ? (
+              <Button color="inherit" onClick={() => {}}>
+                Login &nbsp; <AccountCircle />
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                component={Link}
+                to={`/profile/:id`}
+                onClick={() => {}}
+                sx={{
+                  "&:hover": {
+                    color: "white !important",
+                    textDecoration: "none",
+                  },
+                }}
+              >
+                {!isMobile && <>My Movies &nbsp;</>}
+                <Avatar
+                  style={{ width: 30, height: 30 }}
+                  alt="Profile"
+                  src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                />
+              </Button>
+            )}
+          </div>
+          {isMobile && "Search...."}
         </Toolbar>
       </AppBar>
+      <NavDrawer
+        isMobile={isMobile}
+        drawerOpen={drawerOpen}
+        setDrawerOpen={setDrawerOpen}
+      />
     </>
   );
 };

@@ -11,7 +11,7 @@ https://javascript-mastery.teachable.com/courses/1424734/lectures/39184899
 
 # Git references
 
-https://github.com/stroudcr/filmpire_jsm
+https://github.com/john4suresh/filmpire_JSM/tree/navbar
 https://github.com/adrianhajdin
 https://arc.dev/?utm_source=influencer-bootcamp&utm_medium=courses&utm_campaign=paid2022&utm_content=JS-Mastery
 

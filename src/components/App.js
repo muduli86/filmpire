@@ -5,8 +5,8 @@ import { MovieInformation, Movies, Profile, Actors, Navbar } from "./";
 
 const App = () => {
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         display: "flex",
         height: "100%",
       }}
@@ -15,10 +15,8 @@ const App = () => {
       <Navbar />
       <main
         style={{
-          flexGrow: 2,
-          paddingTop: "5em",
-          paddingLeft: "2em",
-          paddingRight: "2em",
+          flexGrow: 1,
+          padding: "2em",
         }}
       >
         <div
@@ -27,14 +25,14 @@ const App = () => {
           }}
         >
           <Routes>
-            <Route path='/' element={<Movies />} />
-            <Route path='/movies/:id' element={<MovieInformation />} />
-            <Route path='/actors' element={<Actors />} />
-            <Route path='/profile/:id' element={<Profile />} />
+            <Route path="/" element={<h1>Home</h1>} />
+            <Route path="/movies/:id" element={<MovieInformation />} />
+            <Route path="/actors" element={<Actors />} />
+            <Route path="/profile/:id" element={<Profile />} />
           </Routes>
         </div>
       </main>
-    </Box>
+    </div>
   );
 };
 
