@@ -19,6 +19,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import NavDrawer from "./NavDrawer";
+import Search from "../Search";
 
 const Navbar = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -66,7 +67,7 @@ const Navbar = () => {
           >
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
-          {!isMobile && "Search...."}
+          {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
               <Button color="inherit" onClick={() => {}}>
@@ -94,7 +95,7 @@ const Navbar = () => {
               </Button>
             )}
           </div>
-          {isMobile && "Search...."}
+          {isMobile && <Search />}
         </Toolbar>
       </AppBar>
       <NavDrawer

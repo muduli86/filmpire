@@ -12,18 +12,16 @@ import {
   styled,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useGetGenresQuery } from "../../services/TMDB";
+import { useDispatch, useSelector } from "react-redux";
+
+import genreIcons from "../../assets/genres";
+import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 
 const categories = [
   { label: "Popular", value: "popular" },
   { label: "Top Rated", value: "top_rated" },
-  { label: "Most Recent", value: "most_recent" },
-];
-
-const genres = [
-  { label: "Comedy", value: "comedy" },
-  { label: "Animation", value: "animation" },
-  { label: "Horror", value: "horror" },
-  { label: "Action", value: "action" },
+  { label: "Upcoming", value: "upcoming" },
 ];
 
 const blueLogo =
@@ -33,6 +31,8 @@ const redLogo =
 
 const Sidebar = ({ drawerOpen }) => {
   const theme = useTheme();
+  const { data, isFetching } = useGetGenresQuery();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -64,17 +64,20 @@ const Sidebar = ({ drawerOpen }) => {
             }}
             to="/"
           >
-            <ListItem onClick={() => {}} button>
-              {/* <ListItemIcon>
+            <ListItem
+              onClick={() => dispatch(selectGenreOrCategory(value))}
+              button
+            >
+              <ListItemIcon>
                 <img
-                  src={blueLogo}
-                  style={{
-                    filter:
-                      theme.palette.mode === "dark" ? "dark" : "invert(1)",
-                  }}
+                  src={genreIcons[label.toLowerCase()]}
+                  // style={{
+                  //   filter:
+                  //     theme.palette.mode === "dark" ? "dark" : "invert(1)",
+                  // }}
                   height={30}
                 />
-              </ListItemIcon> */}
+              </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
           </Link>
@@ -83,30 +86,39 @@ const Sidebar = ({ drawerOpen }) => {
       <Divider />
       <List>
         <ListSubheader>Genres</ListSubheader>
-        {genres.map(({ label, value }) => (
-          <Link
-            key={value}
-            style={{
-              color: theme.palette.text.primary,
-              textDecoration: "none",
-            }}
-            to="/"
-          >
-            <ListItem onClick={() => {}} button>
-              {/* <ListItemIcon>
-                <img
-                  src={blueLogo}
-                  style={{
-                    filter:
-                      theme.palette.mode === "dark" ? "dark" : "invert(1)",
-                  }}
-                  height={30}
-                />
-              </ListItemIcon> */}
-              <ListItemText primary={label} />
-            </ListItem>
-          </Link>
-        ))}
+        {isFetching && (
+          <Box display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        )}
+        {!isFetching &&
+          data.genres.map(({ name, id }) => (
+            <Link
+              key={name}
+              style={{
+                color: theme.palette.text.primary,
+                textDecoration: "none",
+              }}
+              to="/"
+            >
+              <ListItem
+                onClick={() => dispatch(selectGenreOrCategory(id))}
+                button
+              >
+                <ListItemIcon>
+                  <img
+                    src={genreIcons[name.toLowerCase()]}
+                    // style={{
+                    //   filter:
+                    //     theme.palette.mode === "dark" ? "dark" : "invert(1)",
+                    // }}
+                    height={30}
+                  />
+                </ListItemIcon>
+                <ListItemText primary={name} />
+              </ListItem>
+            </Link>
+          ))}
       </List>
     </>
   );

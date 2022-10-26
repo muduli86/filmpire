@@ -31,7 +31,7 @@ const Movie = ({ movie, i }) => {
       <Grow in key={i} timeout={(i + 1) * 250}>
         <Link
           to={`/movie/${movie.id}`}
-          className='movieLink'
+          className="movieLink"
           style={{
             alignItems: "center",
             fontWeight: "bolder",
@@ -42,7 +42,7 @@ const Movie = ({ movie, i }) => {
         >
           {
             <img
-              className='movieImage'
+              className="movieImage"
               style={{
                 borderRadius: "20px",
                 height: "300px",
@@ -51,13 +51,13 @@ const Movie = ({ movie, i }) => {
               src={
                 movie.poster_path
                   ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                  : `https://image.fillmurray.com/200/300`
+                  : `https://www.fillmurray.com/200/300`
               }
               alt={movie.title}
             />
           }
           <Typography
-            variant='h5'
+            variant="h5"
             sx={{
               color: theme.palette.text.primary,
               textOverflow: "ellipsis",
@@ -73,7 +73,7 @@ const Movie = ({ movie, i }) => {
           </Typography>
           <Tooltip disableTouchListener title={`${movie.vote_average}/ 10`}>
             <div>
-              <Rating readonly value={movie.vote_average / 2} precision={0.1} />
+              <Rating readOnly value={movie.vote_average / 2} precision={0.1} />
             </div>
           </Tooltip>
         </Link>
