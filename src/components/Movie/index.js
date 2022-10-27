@@ -30,7 +30,7 @@ const Movie = ({ movie, i }) => {
     >
       <Grow in key={i} timeout={(i + 1) * 250}>
         <Link
-          to={`/movie/${movie.id}`}
+          to={`/movies/${movie.id}`}
           className="movieLink"
           style={{
             alignItems: "center",
