@@ -27,11 +27,9 @@ import {
 
 import genreIcons from "../../assets/genres";
 
-import { useGetMovieInfoQuery, useGetGenresQuery } from "../../services/TMDB";
+import { useGetMovieInfoQuery } from "../../services/TMDB";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
-
-//images
-import dummyImage from "../../assets/images/gender0.png";
+import RecomendedMovies from "./RecomendedMovies";
 
 const MovieInformation = () => {
   const { id } = useParams();
@@ -41,10 +39,13 @@ const MovieInformation = () => {
   const { data, isFetching, error } = useGetMovieInfoQuery(id);
   const dispatch = useDispatch();
 
+  const isMovieWatched = true;
+  const isMovieFavorite = true;
+
   return (
     <>
       {isFetching && (
-        <Box display="flex" justifyContent="center">
+        <Box display='flex' justifyContent='center'>
           <CircularProgress />
         </Box>
       )}
@@ -70,13 +71,13 @@ const MovieInformation = () => {
                 width: "80%",
                 ...(mdDown && {
                   margin: "0, auto",
-                  width: "60%",
-                  height: "350px",
+                  width: "50%",
+                  height: "450px",
                 }),
                 ...(smDown && {
                   margin: "0, auto",
                   width: "100%",
-                  height: "350px",
+                  height: "450px",
                   marginBottom: "30px",
                 }),
               }}
@@ -84,11 +85,11 @@ const MovieInformation = () => {
               alt={data?.title}
             />
           </Grid>
-          <Grid item container direction="column" lg={7}>
-            <Typography variant="h3" align="center" gutterBottom>
+          <Grid item container direction='column' lg={7}>
+            <Typography variant='h3' align='center' gutterBottom>
               {data?.title} ({data?.release_date.split("-")[0]})
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography variant='h5' align='center' gutterBottom>
               {data?.tagline}
             </Typography>
             <Grid
@@ -103,14 +104,14 @@ const MovieInformation = () => {
                 },
               }}
             >
-              <Box display="flex" aliign="center">
+              <Box display='flex' aliign='center'>
                 <Rating
                   readOnly
                   value={data.vote_average / 2}
                   precision={0.1}
                 />
                 <Typography
-                  variant="subtitle1"
+                  variant='subtitle1'
                   gutterBottom
                   sx={{ ml: 1, mr: 1 }}
                 >
@@ -118,7 +119,7 @@ const MovieInformation = () => {
                 </Typography>
               </Box>
 
-              <Typography variant="h6" gutterBottom>
+              <Typography variant='h6' gutterBottom>
                 {data.runtime}min
                 {data.spoken_languages.length > 0 &&
                   data.spoken_languages.map((language) => `/ ${language.name}`)}
@@ -137,7 +138,7 @@ const MovieInformation = () => {
                 data.genres.map((genre, index) => (
                   <Link
                     key={genre.id}
-                    to="/"
+                    to='/'
                     style={{
                       display: "flex",
                       justifyContent: "center",
@@ -153,54 +154,151 @@ const MovieInformation = () => {
                       style={{
                         marginRight: "10px",
                       }}
+                      alt={genre.name}
                       height={30}
                     />
-                    <Typography color="textPrimary" variant="subtitle">
+                    <Typography color='textPrimary' variant='subtitle'>
                       {genre.name}
                     </Typography>
                   </Link>
                 ))}
             </Grid>
 
-            <Typography variant="h5" gutterBottom sx={{ mt: "10px" }}>
+            <Typography variant='h5' gutterBottom sx={{ mt: "10px" }}>
               Overview
             </Typography>
-            <Typography variant="inherit" sx={{ mb: "2rem" }}>
+            <Typography variant='inherit' sx={{ mb: "2rem" }}>
               {data.overview}
             </Typography>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant='h5' gutterBottom>
               Top Cast
             </Typography>
             <Grid container spacing={2}>
-              {data.credits?.cast?.map((char, i) => (
-                <Grid
-                  key={i}
-                  item
-                  xs={4}
-                  md={2}
-                  component={Link}
-                  to={`/actors/${char.id}`}
-                  sx={{ textDecoration: "none" }}
-                >
-                  <img
-                    src={
-                      char.profile_path
-                        ? `https://image.tmdb.org/t/p/w500/${char.profile_path}`
-                        : dummyImage
-                    }
-                    style={{
-                      width: "100%",
-                      height: "8em",
-                      maxWidth: "7em",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
-                  />
-                  <Typography>{char.name}</Typography>
+              {data.credits?.cast
+                ?.map(
+                  (char, i) =>
+                    char.profile_path && (
+                      <Grid
+                        key={i}
+                        item
+                        xs={4}
+                        md={2}
+                        component={Link}
+                        to={`/actors/${char.id}`}
+                        sx={{ textDecoration: "none" }}
+                      >
+                        <img
+                          src={`https://image.tmdb.org/t/p/w500/${char.profile_path}`}
+                          alt={char.name}
+                          style={{
+                            width: "100%",
+                            height: "8em",
+                            maxWidth: "7em",
+                            objectFit: "cover",
+                            borderRadius: "10px",
+                          }}
+                        />
+                        <Typography color='textPrimary'>{char.name}</Typography>
+                        <Typography color='textSecondary'>
+                          {char.character}
+                        </Typography>
+                      </Grid>
+                    )
+                )
+                .slice(0, 6)}
+            </Grid>
+            <Grid
+              item
+              container
+              sx={{
+                mt: "2rem",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  [theme.breakpoints.down("sm")]: {
+                    flexDirection: "column",
+                  },
+                }}
+              >
+                <Grid item xs={12} sm={6} sx={{ mb: "10px" }}>
+                  <ButtonGroup variant='outlined' size='medium'>
+                    <Button
+                      endIcon={<Language />}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      href={data?.homepage}
+                    >
+                      website
+                    </Button>
+                    <Button
+                      endIcon={<MovieIcon />}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      href={`https://www.imdb.com/title/${data?.imdb_id}/`}
+                    >
+                      imdb
+                    </Button>
+                    <Button
+                      endIcon={<Theaters />}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      onClick={() => {}}
+                      href='#'
+                    >
+                      trailer
+                    </Button>
+                  </ButtonGroup>
                 </Grid>
-              ))}
+                <Grid item xs={12} sm={6} sx={{}}>
+                  <ButtonGroup
+                    variant='outlined'
+                    size='medium'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <Button
+                      onClick={() => {}}
+                      endIcon={
+                        isMovieFavorite ? (
+                          <Favorite />
+                        ) : (
+                          <FavoriteBorderOutlined />
+                        )
+                      }
+                    >
+                      favorite
+                    </Button>
+                    <Button onClick={() => {}} endIcon={<PlusOne />}>
+                      watchlist
+                    </Button>
+                    <Button
+                      endIcon={<ArrowBack />}
+                      sx={{
+                        borderColor: "primary.main",
+                      }}
+                    >
+                      <Typography
+                        to='/'
+                        color='inherit'
+                        variant='subtitle2'
+                        component={Link}
+                        sx={{ textDecoration: "none" }}
+                      >
+                        Back
+                      </Typography>
+                    </Button>
+                  </ButtonGroup>
+                </Grid>
+              </Box>
             </Grid>
           </Grid>
+          <Box sx={{ mt: "5rem", width: "100%" }}>
+            <RecomendedMovies id={id} />
+          </Box>
         </Grid>
       )}
     </>

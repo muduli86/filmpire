@@ -37,7 +37,7 @@ const Sidebar = ({ drawerOpen }) => {
   return (
     <>
       <Link
-        to="/"
+        to='/'
         style={{
           display: "flex",
           justifyContent: "center",
@@ -49,7 +49,7 @@ const Sidebar = ({ drawerOpen }) => {
           style={{
             width: "70%",
           }}
-          alt="Logo"
+          alt='Logo'
         />
       </Link>
       <Divider />
@@ -62,7 +62,7 @@ const Sidebar = ({ drawerOpen }) => {
               color: theme.palette.text.primary,
               textDecoration: "none",
             }}
-            to="/"
+            to='/'
           >
             <ListItem
               onClick={() => dispatch(selectGenreOrCategory(value))}
@@ -75,6 +75,7 @@ const Sidebar = ({ drawerOpen }) => {
                   //   filter:
                   //     theme.palette.mode === "dark" ? "dark" : "invert(1)",
                   // }}
+                  alt='item'
                   height={30}
                 />
               </ListItemIcon>
@@ -87,7 +88,7 @@ const Sidebar = ({ drawerOpen }) => {
       <List>
         <ListSubheader>Genres</ListSubheader>
         {isFetching && (
-          <Box display="flex" justifyContent="center">
+          <Box display='flex' justifyContent='center'>
             <CircularProgress />
           </Box>
         )}
@@ -99,7 +100,7 @@ const Sidebar = ({ drawerOpen }) => {
                 color: theme.palette.text.primary,
                 textDecoration: "none",
               }}
-              to="/"
+              to='/'
             >
               <ListItem
                 onClick={() => dispatch(selectGenreOrCategory(id))}

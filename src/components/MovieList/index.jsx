@@ -3,7 +3,7 @@ import React from "react";
 
 import Movie from "../Movie";
 
-const MovieList = ({ data }) => {
+const MovieList = ({ data, numberofMovies }) => {
   const theme = useTheme();
   return (
     <Grid
@@ -18,7 +18,7 @@ const MovieList = ({ data }) => {
         },
       }}
     >
-      {data.results.map((movie, i) => (
+      {data.results.slice(0, numberofMovies).map((movie, i) => (
         <Movie key={i} movie={movie} i={i} />
       ))}
     </Grid>
