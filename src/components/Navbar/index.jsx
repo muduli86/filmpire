@@ -31,7 +31,7 @@ const Navbar = () => {
 
   const token = localStorage.getItem("request_token");
   const sessionId_local = localStorage.getItem("session_Id");
-  console.log(user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
