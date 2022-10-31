@@ -50,6 +50,17 @@ export const tmdbApi = createApi({
       query: ({ movie_id, list }) =>
         `/movie/${movie_id}/${list}?api_key=${tmdbApiKey}`,
     }),
+
+    //* Get Actor Information
+    getActorInformation: builder.query({
+      query: (actor_id) => `/person/${actor_id}?api_key=${tmdbApiKey}`,
+    }),
+
+    //* Get Actor Movies
+    getActorMovies: builder.query({
+      query: (actor_id) =>
+        `/discover/movie?with_cast=${actor_id}&page=1&api_key=${tmdbApiKey}`,
+    }),
   }),
 });
 
@@ -58,4 +69,9 @@ export const {
   useGetGenresQuery,
   useGetMovieInfoQuery,
   useGetRecomendationsQuery,
+  useGetActorInformationQuery,
+  useGetActorMoviesQuery,
 } = tmdbApi;
+
+// https://api.themoviedb.org/3/discover/movie?with_cast=1882502&page=1&api_key=732dfe94c237f44327af913ebba97825
+// https://api.themoviedb.org/3/person/1882502?api_key=732dfe94c237f44327af913ebba97825
