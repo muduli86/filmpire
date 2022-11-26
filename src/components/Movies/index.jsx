@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  Box,
-  CircularProgress,
-  useMediaQuery,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, useMediaQuery, useTheme } from "@mui/material";
 
 import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../services/TMDB";
 import { MovieList } from "..";
+import Pagination from "../Pagination";
 
 const Movies = () => {
   const [page, setPage] = useState(1);
@@ -21,15 +17,23 @@ const Movies = () => {
     page,
     searchQuery,
   });
+  const theme = useTheme();
+  const lg = useMediaQuery(theme.breakpoints.only("lg"));
+  const numberofMovies = lg ? 16 : 18;
 
   return (
     <div>
       {isFetching && (
-        <Box display="flex" justifyContent="center">
+        <Box display='flex' justifyContent='center'>
           <CircularProgress />
         </Box>
       )}
-      {!isFetching && <MovieList data={data} />}
+      {!isFetching && (
+        <div>
+          <MovieList data={data} numberofMovies={numberofMovies} />
+          <Pagination page={page} setPage={setPage} pages={data.total_pages} />
+        </div>
+      )}
       {error && <h3>Error loading..</h3>}
     </div>
   );

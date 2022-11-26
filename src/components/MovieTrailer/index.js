@@ -4,6 +4,7 @@ import React, { useState } from "react";
 const MovieTrailer = ({ videos, open, setOpen }) => {
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
+  debugger;
   return (
     <Modal
       closeAfterTransition
@@ -26,10 +27,10 @@ const MovieTrailer = ({ videos, open, setOpen }) => {
               height: "50%",
             }),
           }}
-          frameBorder="0"
-          title="Trailer"
+          frameBorder='0'
+          title='Trailer'
           src={`https://youtube.com/embed/${videos.results[0].key}`}
-          allow="autoplay"
+          allow='autoplay'
         />
       )}
     </Modal>

@@ -47,7 +47,7 @@ const MovieInformation = () => {
   return (
     <>
       {isFetching && (
-        <Box display="flex" justifyContent="center">
+        <Box display='flex' justifyContent='center'>
           <CircularProgress />
         </Box>
       )}
@@ -87,11 +87,11 @@ const MovieInformation = () => {
               alt={data?.title}
             />
           </Grid>
-          <Grid item container direction="column" lg={7}>
-            <Typography variant="h3" align="center" gutterBottom>
+          <Grid item container direction='column' lg={7}>
+            <Typography variant='h3' align='center' gutterBottom>
               {data?.title} ({data?.release_date.split("-")[0]})
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography variant='h5' align='center' gutterBottom>
               {data?.tagline}
             </Typography>
             <Grid
@@ -106,14 +106,14 @@ const MovieInformation = () => {
                 },
               }}
             >
-              <Box display="flex" aliign="center">
+              <Box display='flex' aliign='center'>
                 <Rating
                   readOnly
                   value={data.vote_average / 2}
                   precision={0.1}
                 />
                 <Typography
-                  variant="subtitle1"
+                  variant='subtitle1'
                   gutterBottom
                   sx={{ ml: 1, mr: 1 }}
                 >
@@ -121,7 +121,7 @@ const MovieInformation = () => {
                 </Typography>
               </Box>
 
-              <Typography variant="h6" gutterBottom>
+              <Typography variant='h6' gutterBottom>
                 {data.runtime}min
                 {data.spoken_languages.length > 0 &&
                   data.spoken_languages.map((language) => `/ ${language.name}`)}
@@ -140,7 +140,7 @@ const MovieInformation = () => {
                 data.genres.map((genre, index) => (
                   <Link
                     key={genre.id}
-                    to="/"
+                    to='/'
                     style={{
                       display: "flex",
                       justifyContent: "center",
@@ -159,20 +159,20 @@ const MovieInformation = () => {
                       alt={genre.name}
                       height={30}
                     />
-                    <Typography color="textPrimary" variant="subtitle">
+                    <Typography color='textPrimary' variant='subtitle'>
                       {genre.name}
                     </Typography>
                   </Link>
                 ))}
             </Grid>
 
-            <Typography variant="h5" gutterBottom sx={{ mt: "10px" }}>
+            <Typography variant='h5' gutterBottom sx={{ mt: "10px" }}>
               Overview
             </Typography>
-            <Typography variant="inherit" sx={{ mb: "2rem" }}>
+            <Typography variant='inherit' sx={{ mb: "2rem" }}>
               {data.overview}
             </Typography>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant='h5' gutterBottom>
               Top Cast
             </Typography>
             <Grid container spacing={2}>
@@ -200,8 +200,8 @@ const MovieInformation = () => {
                             borderRadius: "10px",
                           }}
                         />
-                        <Typography color="textPrimary">{char.name}</Typography>
-                        <Typography color="textSecondary">
+                        <Typography color='textPrimary'>{char.name}</Typography>
+                        <Typography color='textSecondary'>
                           {char.character}
                         </Typography>
                       </Grid>
@@ -227,19 +227,19 @@ const MovieInformation = () => {
                 }}
               >
                 <Grid item xs={12} sm={6} sx={{ mb: "10px" }}>
-                  <ButtonGroup variant="outlined" size="medium">
+                  <ButtonGroup variant='outlined' size='medium'>
                     <Button
                       endIcon={<Language />}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                       href={data?.homepage}
                     >
                       website
                     </Button>
                     <Button
                       endIcon={<MovieIcon />}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                       href={`https://www.imdb.com/title/${data?.imdb_id}/`}
                     >
                       imdb
@@ -256,10 +256,10 @@ const MovieInformation = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} sx={{}}>
                   <ButtonGroup
-                    variant="outlined"
-                    size="medium"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    variant='outlined'
+                    size='medium'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     <Button
                       onClick={() => {}}
@@ -283,9 +283,9 @@ const MovieInformation = () => {
                       }}
                     >
                       <Typography
-                        to="/"
-                        color="inherit"
-                        variant="subtitle2"
+                        to='/'
+                        color='inherit'
+                        variant='subtitle2'
                         component={Link}
                         sx={{ textDecoration: "none" }}
                       >

@@ -31,7 +31,7 @@ const Movie = ({ movie, i }) => {
       <Grow in key={i} timeout={(i + 1) * 250}>
         <Link
           to={`/movies/${movie.id}`}
-          className="movieLink"
+          className='movieLink'
           style={{
             alignItems: "center",
             fontWeight: "bolder",
@@ -42,10 +42,12 @@ const Movie = ({ movie, i }) => {
         >
           {
             <img
-              className="movieImage"
+              className='movieImage'
               style={{
                 borderRadius: "20px",
                 height: "300px",
+
+                padding: "5px",
                 marginBottom: "10px",
               }}
               src={
@@ -57,7 +59,7 @@ const Movie = ({ movie, i }) => {
             />
           }
           <Typography
-            variant="h5"
+            variant='h5'
             sx={{
               color: theme.palette.text.primary,
               textOverflow: "ellipsis",

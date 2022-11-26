@@ -23,3 +23,7 @@ https://filmpire.netlify.app/
 
 Documentation: https://developers.themoviedb.org/3
 API settings: https://www.themoviedb.org/settings/api
+
+# Bugs
+
+http://localhost:3000/movies/820067 -- Error
